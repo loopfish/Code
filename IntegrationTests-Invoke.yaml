@@ -1,0 +1,12 @@
+        - powershell: |
+            #####################################
+            # Install Pester if it doesnt exist #
+            #####################################
+
+            Invoke-Pester -Script @{
+                                      Path = '$(System.ArtifactsDirectory)/terraform/Tests/IntegrationTests.ps1';
+                                      Parameters = @{clientSecret = "$(client_secret)"; suffix = "$(suffix)" }
+                                  } `
+                          -OutputFormat NUnitXml `
+                          -OutputFile $(System.ArtifactsDirectory)/InfraTests.xml
+          displayName: 'Run Infrastructure Tests'
