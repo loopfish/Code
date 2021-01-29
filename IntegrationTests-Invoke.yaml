@@ -10,3 +10,9 @@
                           -OutputFormat NUnitXml `
                           -OutputFile $(System.ArtifactsDirectory)/InfraTests.xml
           displayName: 'Run Infrastructure Tests'
+
+        - task: PublishTestResults@2
+          displayName: 'Publish Test Results'
+          inputs:
+            testResultsFormat: NUnit
+            testResultsFiles: '$(System.ArtifactsDirectory)/InfraTests.xml'
